@@ -15,8 +15,10 @@ from urllib.parse import urlparse
 import mlflow
 from mlflow.models import infer_signature
 import mlflow.sklearn
-
 import logging
+
+import dagshub
+dagshub.init(repo_owner='BenGJ10', repo_name='ML-Lifecycle', mlflow=True)
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
@@ -77,6 +79,9 @@ if __name__ == "__main__":
 
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
+
+        remote_server_uri = "https://dagshub.com/BenGJ10/ML-Lifecycle.mlflow" 
+        mlflow.set_tracking_uri(remote_server_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
         # Model registry does not work with file store
@@ -86,8 +91,8 @@ if __name__ == "__main__":
             # please refer to the doc for more information:
             # https://mlflow.org/docs/latest/model-registry.html#api-workflow
             mlflow.sklearn.log_model(
-                sk_model=lr, name="model", registered_model_name="ElasticnetWineModel", signature=signature
+                lr,"model", registered_model_name="ElasticnetWineModel", signature=signature
             )
         else:
-            mlflow.sklearn.log_model(sk_model=lr, name="model",
+            mlflow.sklearn.log_model(lr, "model",
                 signature=signature)
