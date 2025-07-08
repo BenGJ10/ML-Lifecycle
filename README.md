@@ -2,7 +2,6 @@
 
 This document provides an overview of tools and practices for managing the complete machine learning lifecycle, from data collection to model deployment and monitoring.
 
-
 ## MLFlow
 
 MLFlow is an open-source platform for managing the end-to-end machine learning lifecycle. It provides tools for tracking experiments, packaging code into reproducible runs, and sharing and deploying models.
@@ -19,7 +18,7 @@ MLFlow is an open-source platform for managing the end-to-end machine learning l
 
 Data Version Control (DVC) is a tool for managing machine learning projects, particularly those involving large datasets and complex workflows. It allows you to version control your data, models, and experiments in a way similar to how Git works for code.
 
-###Key Features
+### Key Features
 - **Data Versioning**: Track changes in datasets and models over time.
 - **Experiment Management**: Run and compare experiments with different parameters and configurations.
 - **Pipeline Management**: Define and manage data processing pipelines.
